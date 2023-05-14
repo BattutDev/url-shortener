@@ -9,7 +9,7 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   @Get('@me')
   public getMe(@GetUser() user: UserSessionType) {
-    return user;
+    return this.usersService.getById(user.id);
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
