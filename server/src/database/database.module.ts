@@ -3,6 +3,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { redisStore } from 'cache-manager-redis-store';
+import * as process from 'process';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -28,8 +29,9 @@ import { redisStore } from 'cache-manager-redis-store';
           // Store-specific configuration:
           socket: {
             host: 'localhost',
-            port: 6379,
+            port: process.env.REDIS_PORT as unknown as number,
           },
+          ttl: 1000 * 3600 * 24 * 7,
         });
       },
     }),
