@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Post,
-  Req,
-} from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { GetToken, GetUser } from './user.context';
 import { UserSessionType } from '../entities/user.entity';
 import { UsersService } from './users.service';
