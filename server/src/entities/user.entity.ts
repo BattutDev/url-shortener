@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import LinkEntity from './link.entity';
+import GroupEntity from './group.entity';
 
 @Entity({
   name: 'users',
@@ -41,6 +42,9 @@ export default class UserEntity {
 
   @OneToMany(() => LinkEntity, (link) => link.author)
   links: Array<LinkEntity>;
+
+  @OneToMany(() => GroupEntity, (group) => group.user)
+  groups: Array<GroupEntity>;
 
   @CreateDateColumn({
     name: 'created_at',
