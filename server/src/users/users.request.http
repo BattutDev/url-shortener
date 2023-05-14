@@ -1,0 +1,16 @@
+### Login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "mail": "antoine@battut.dev",
+  "password": "toto"
+}
+
+### Authorization by token
+GET http://localhost:8080/users/@me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDY0NzQwfQ.GZcOxXN-zncHw3ahgAmUoYjOIIVGEVVYNnZmkwgiDNA
+
+### Authorization by token
+POST http://localhost:8080/users/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDY0NjM1fQ.MHQIaPspV61VzunH04q61Hfjj7jez2TNJVxgfRUNgT8
