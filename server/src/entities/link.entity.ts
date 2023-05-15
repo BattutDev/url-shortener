@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import UserEntity from './user.entity';
 import { LinkMethodType } from '../links/links.type';
+import GroupEntity from './group.entity';
 @Entity({
   name: 'links',
 })
@@ -30,6 +31,22 @@ export default class LinkEntity {
     referencedColumnName: 'id',
   })
   userEntity: UserEntity;
+
+  @Column({
+    name: 'group_id',
+    nullable: true,
+  })
+  public group: number;
+
+  @ManyToOne(() => GroupEntity, (group) => group.id, {
+    eager: true,
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({
+    name: 'group_id',
+    referencedColumnName: 'id',
+  })
+  groupEntity: GroupEntity;
 
   @Column({
     name: 'name',

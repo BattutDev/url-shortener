@@ -100,4 +100,13 @@ export class GroupsService {
       })
       .then(null);
   }
+
+  exists(uid: number, gid: number): Promise<boolean> {
+    return this.groupRepository.exist({
+      where: {
+        user: uid,
+        id: gid,
+      },
+    });
+  }
 }

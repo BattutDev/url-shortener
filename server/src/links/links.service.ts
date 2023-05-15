@@ -9,12 +9,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import LinkEntity from '../entities/link.entity';
 import { PatchLinkBodyType, PostLinkBodyType } from './links.type';
+import { GroupsService } from '../groups/groups.service';
 
 @Injectable()
 export class LinksService {
   constructor(
     @InjectRepository(LinkEntity)
     private readonly linkRepository: Repository<LinkEntity>,
+
+    private readonly groupsService: GroupsService,
   ) {}
 
   getByName(name: string, method): Promise<LinkEntity> {
@@ -56,6 +59,11 @@ export class LinksService {
         'Method field must be "normal" or "subdomain"',
       );
 
+    if (body.group) {
+      const group = await this.groupsService.exists(uid, body.group);
+      if (!group) body.group = null;
+    }
+
     const isExists = await this.linkRepository.exist({
       where: {
         name: body.name,
@@ -77,13 +85,18 @@ export class LinksService {
     gid: number,
     body: PatchLinkBodyType,
   ): Promise<LinkEntity> {
-    if (!body.name && !body.redirect && !body.method)
+    if (!body.name && !body.redirect && !body.method && !body.group)
       throw new NotAcceptableException('Missing fields');
 
     if (body.method && !['normal', 'subdomain'].includes(body.method))
       throw new NotAcceptableException(
         'Method field must be "normal" or "subdomain"',
       );
+
+    if (body.group) {
+      const group = await this.groupsService.exists(uid, body.group);
+      if (!group) body.group = null;
+    }
 
     const link = await this.linkRepository.findOne({
       where: {

@@ -8,5 +8,6 @@ import GroupEntity from '../entities/group.entity';
   controllers: [GroupsController],
   providers: [GroupsService],
   imports: [TypeOrmModule.forFeature([GroupEntity])],
+  exports: [GroupsService],
 })
 export class GroupsModule {}
