@@ -6,7 +6,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import GroupEntity from '../entities/group.entity';
 import { Repository } from 'typeorm';
 import LinkEntity from '../entities/link.entity';
 import { PatchLinkBodyType, PostLinkBodyType } from './links.type';
