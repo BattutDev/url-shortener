@@ -12,7 +12,6 @@ import {
 import { UserSessionType } from './entities/user.entity';
 import { LoginReturnBodyType, UsersService } from './users/users.service';
 import { Request, Response } from 'express';
-import { LinksService } from './links/links.service';
 import { AppService } from './app.service';
 
 export type UserRequest = Request &
