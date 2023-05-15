@@ -1,22 +1,22 @@
 ### Authorization by token
 GET http://localhost:8080/groups/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDk4Mjc2fQ.ovOqmEbSZttrmMl5Rd7M5K3Pl3oJDLDkSkq9cGaSljc
+Authorization: Bearer
 
 
 ### Create group
 POST http://localhost:8080/groups/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDk4Mjc2fQ.ovOqmEbSZttrmMl5Rd7M5K3Pl3oJDLDkSkq9cGaSljc
+Authorization: Bearer
 
 {
-  "name": "coucou",
+  "name": "tttt",
   "color": "#FFFFF"
 }
 
 ### Update group
 PATCH http://localhost:8080/groups/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDk4Mjc2fQ.ovOqmEbSZttrmMl5Rd7M5K3Pl3oJDLDkSkq9cGaSljc
+Authorization: Bearer
 
 {
   "color": "#FFFFFEEYY"
@@ -25,9 +25,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZ
 ### Delete group
 DELETE http://localhost:8080/groups/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDk4Mjc2fQ.ovOqmEbSZttrmMl5Rd7M5K3Pl3oJDLDkSkq9cGaSljc
+Authorization: Bearer
 
 ### Get group by id
 GET http://localhost:8080/groups/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDk4Mjc2fQ.ovOqmEbSZttrmMl5Rd7M5K3Pl3oJDLDkSkq9cGaSljc
+Authorization: Bearer
