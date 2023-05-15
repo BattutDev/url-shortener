@@ -14,7 +14,6 @@ import { LoginReturnBodyType, UsersService } from './users/users.service';
 import { Request, Response } from 'express';
 import { LinksService } from './links/links.service';
 import { AppService } from './app.service';
-import { PostLinkBodyType } from './links/links.type';
 
 export type UserRequest = Request &
   Record<'user', UserSessionType> &
@@ -29,7 +28,6 @@ export class AppController {
   constructor(
     private readonly service: AppService,
     private readonly usersService: UsersService,
-    private readonly linksService: LinksService,
   ) {}
 
   @HttpCode(HttpStatus.OK)
