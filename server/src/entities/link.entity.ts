@@ -8,6 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import UserEntity from './user.entity';
+import { LinkMethodType } from '../links/links.type';
 @Entity({
   name: 'links',
 })
@@ -15,14 +16,20 @@ export default class LinkEntity {
   @PrimaryGeneratedColumn()
   public id: number;
 
+  @Column({
+    name: 'user_id',
+  })
+  user: number;
+
   @ManyToOne(() => UserEntity, (user) => user.id, {
-    eager: true,
+    eager: false,
+    onDelete: 'CASCADE',
   })
   @JoinColumn({
     name: 'user_id',
     referencedColumnName: 'id',
   })
-  author: UserEntity;
+  userEntity: UserEntity;
 
   @Column({
     name: 'name',
@@ -52,4 +59,11 @@ export default class LinkEntity {
     nullable: false,
   })
   public enabled: boolean;
+
+  @Column({
+    type: 'enum',
+    enum: ['normal', 'subdomain'],
+    default: 'normal',
+  })
+  method: LinkMethodType;
 }

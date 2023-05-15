@@ -6,6 +6,7 @@ import * as NestConfig from '@nestjs/config';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { GroupsModule } from './groups/groups.module';
 import { ConfigModule } from '@nestjs/config';
+import { LinksModule } from './links/links.module';
 
 @Module({
   imports: [
@@ -14,11 +15,12 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     GroupsModule,
     ConfigModule.forRoot(),
+    LinksModule,
   ],
   controllers: [AppController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('users', 'groups');
+    consumer.apply(AuthMiddleware).forRoutes('users', 'groups', 'links');
   }
 }

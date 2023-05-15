@@ -40,7 +40,7 @@ export default class UserEntity {
   })
   public fullName: string;
 
-  @OneToMany(() => LinkEntity, (link) => link.author)
+  @OneToMany(() => LinkEntity, (link) => link.user)
   links: Array<LinkEntity>;
 
   @OneToMany(() => GroupEntity, (group) => group.user)
