@@ -12,7 +12,7 @@ import {
 import { GroupsService } from './groups.service';
 import { GetUser } from '../users/user.context';
 import GroupEntity from '../entities/group.entity';
-import { PatchBodyType, PostBodyType } from './groups.type';
+import { PatchGroupBodyType, PostGroupBodyType } from './groups.type';
 
 @Controller('groups')
 export class GroupsController {
@@ -29,14 +29,17 @@ export class GroupsController {
   }
 
   @Post('/')
-  create(@GetUser() user, @Body() body: PostBodyType): Promise<GroupEntity> {
+  create(
+    @GetUser() user,
+    @Body() body: PostGroupBodyType,
+  ): Promise<GroupEntity> {
     return this.service.insert(user.id, body);
   }
 
   @Patch('/:id')
   update(
     @GetUser() user,
-    @Body() body: PatchBodyType,
+    @Body() body: PatchGroupBodyType,
     @Param() { id },
   ): Promise<GroupEntity> {
     return this.service.update(user.id, id, body);
