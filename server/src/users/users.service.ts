@@ -11,6 +11,7 @@ import { RandomGenerator } from 'typeorm/util/RandomGenerator';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 export type LoginReturnBodyType = {
   token: string;
@@ -21,6 +22,7 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    private readonly configService: ConfigService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private jwtService: JwtService,
   ) {}
@@ -62,8 +64,7 @@ export class UsersService {
             delete user.password;
             const payload = { mail, password };
             const token = this.jwtService.sign(payload, {
-              secret:
-                'C-pU%){^[Tb9J]p2EE8:jA}Ni5MQ=2qaSJ8Cf;5/m3_;92f8Hf?!Yp5$5(2K*qC5,9VQ9b.8#~d@ju7PNbsgj2VTzkhWh6429T+8',
+              secret: this.configService.get('JWT_SECRET'),
             });
             await this.cacheManager.set(token, user);
             resolve({

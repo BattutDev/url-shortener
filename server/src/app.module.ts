@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import * as NestConfig from '@nestjs/config';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { GroupsModule } from './groups/groups.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { GroupsModule } from './groups/groups.module';
     NestConfig.ConfigModule.forRoot({ envFilePath: '.env' }),
     UsersModule,
     GroupsModule,
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController],
 })
