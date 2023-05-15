@@ -7,6 +7,7 @@ import { AuthMiddleware } from './auth/auth.middleware';
 import { GroupsModule } from './groups/groups.module';
 import { ConfigModule } from '@nestjs/config';
 import { LinksModule } from './links/links.module';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { LinksModule } from './links/links.module';
     LinksModule,
   ],
   controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
