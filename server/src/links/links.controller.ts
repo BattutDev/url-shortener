@@ -9,39 +9,36 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { GroupsService } from './groups.service';
+import { LinksService } from './links.service';
 import { GetUser } from '../users/user.context';
-import GroupEntity from '../entities/group.entity';
-import { PatchGroupBodyType, PostGroupBodyType } from './groups.type';
+import LinkEntity from '../entities/link.entity';
+import { PatchLinkBodyType, PostLinkBodyType } from './links.type';
 
-@Controller('groups')
-export class GroupsController {
-  constructor(private readonly service: GroupsService) {}
+@Controller('links')
+export class LinksController {
+  constructor(private readonly service: LinksService) {}
 
   @Get('/')
-  getAll(@GetUser() user): Promise<Array<GroupEntity>> {
+  getAll(@GetUser() user): Promise<Array<LinkEntity>> {
     return this.service.getAll(user.id);
   }
 
   @Get('/:id')
-  get(@GetUser() user, @Param() { id }): Promise<GroupEntity> {
+  get(@GetUser() user, @Param() { id }): Promise<LinkEntity> {
     return this.service.get(user.id, id);
   }
 
   @Post('/')
-  create(
-    @GetUser() user,
-    @Body() body: PostGroupBodyType,
-  ): Promise<GroupEntity> {
+  create(@GetUser() user, @Body() body: PostLinkBodyType): Promise<LinkEntity> {
     return this.service.insert(user.id, body);
   }
 
   @Patch('/:id')
   update(
     @GetUser() user,
-    @Body() body: PatchGroupBodyType,
+    @Body() body: PatchLinkBodyType,
     @Param() { id },
-  ): Promise<GroupEntity> {
+  ): Promise<LinkEntity> {
     return this.service.update(user.id, id, body);
   }
 

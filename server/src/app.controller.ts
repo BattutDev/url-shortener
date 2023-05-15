@@ -4,11 +4,15 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
+  Req,
+  Res,
 } from '@nestjs/common';
 import { UserSessionType } from './entities/user.entity';
 import { LoginReturnBodyType, UsersService } from './users/users.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
+import { AppService } from './app.service';
 
 export type UserRequest = Request &
   Record<'user', UserSessionType> &
@@ -20,7 +24,10 @@ export type LoginBodyType = {
 };
 @Controller()
 export class AppController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly service: AppService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
@@ -29,8 +36,15 @@ export class AppController {
   ): Promise<LoginReturnBodyType> {
     return this.usersService.login(mail, password);
   }
+
+  @Get('/:name')
+  getNormalLink(@Param() { name }, @Res() res: Response): Promise<void> {
+    return this.service.redirect(name, 'normal', res);
+  }
+
   @Get()
-  getHello(): string {
-    return 'Heelo World';
+  getSubLink(@Req() req: Request, @Res() res: Response): Promise<void> {
+    const sub: string = req.headers.host.split('.')[0] || '';
+    return this.service.redirect(sub, 'subdomain', res);
   }
 }

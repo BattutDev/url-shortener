@@ -25,6 +25,6 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Accept, Authorization',
   });
 
-  await app.listen(8080);
+  await app.listen(8080, '0.0.0.0');
 }
 bootstrap();

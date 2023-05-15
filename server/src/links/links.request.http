@@ -1,0 +1,33 @@
+### Authorization by token
+GET http://localhost:8080/links/
+Authorization: Bearer
+
+
+### Create link
+POST http://localhost:8080/links/
+Content-Type: application/json
+Authorization: Bearer
+
+{
+  "name": "voitures",
+  "redirect": "https://oscaro.com"
+}
+
+### Update link
+PATCH http://localhost:8080/links/6
+Content-Type: application/json
+Authorization: Bearer
+
+{
+  "method": "normal"
+}
+
+### Delete link
+DELETE http://localhost:8080/links/2
+Content-Type: application/json
+Authorization: Bearer 
+
+### Get link by id
+GET http://localhost:8080/links/5
+Content-Type: application/json
+Authorization: Bearer

@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import GroupEntity from '../entities/group.entity';
-import { PatchBodyType, PostBodyType } from './groups.type';
+import { PatchGroupBodyType, PostGroupBodyType } from './groups.type';
 
 @Injectable()
 export class GroupsService {
@@ -17,7 +17,7 @@ export class GroupsService {
     private readonly groupRepository: Repository<GroupEntity>,
   ) {}
 
-  getAllByUserId(uid: number): Promise<Array<GroupEntity>> {
+  getAll(uid: number): Promise<Array<GroupEntity>> {
     return this.groupRepository.find({
       where: {
         user: uid,
@@ -40,7 +40,7 @@ export class GroupsService {
 
   async insert(
     uid: number,
-    { name, color }: PostBodyType,
+    { name, color }: PostGroupBodyType,
   ): Promise<GroupEntity> {
     if (!name || !color)
       throw new NotAcceptableException('Missing name or color field');
@@ -69,7 +69,7 @@ export class GroupsService {
   async update(
     uid: number,
     gid: number,
-    { color }: PatchBodyType,
+    { color }: PatchGroupBodyType,
   ): Promise<GroupEntity> {
     if (!color) throw new NotAcceptableException('Missing color field');
     const group = await this.groupRepository.findOne({
@@ -79,25 +79,34 @@ export class GroupsService {
       },
     });
 
+    if (!group) throw new NotFoundException('Cannot found this group');
+
     if (color === group.color)
       throw new HttpException(
         'new color is the same that old color',
         HttpStatus.NOT_MODIFIED,
       );
 
-    if (!group) throw new NotFoundException('Cannot found this group');
-
     group.color = color;
 
     return await this.groupRepository.save(group);
   }
 
-  async delete(uid: number, gid: number): Promise<void> {
+  delete(uid: number, gid: number): Promise<void> {
     return this.groupRepository
       .delete({
         user: uid,
         id: gid,
       })
       .then(null);
+  }
+
+  exists(uid: number, gid: number): Promise<boolean> {
+    return this.groupRepository.exist({
+      where: {
+        user: uid,
+        id: gid,
+      },
+    });
   }
 }

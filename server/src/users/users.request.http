@@ -9,8 +9,8 @@ Content-Type: application/json
 
 ### Authorization by token
 GET http://localhost:8080/users/@me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDY2MDkxfQ.mtFUmjeqpqNNP1S0YlDMhfC1vtI9FtxKCugZoyvYGV0
+Authorization: Bearer
 
 ### Authorization by token
 POST http://localhost:8080/users/logout
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoiYW50b2luZUBiYXR0dXQuZGV2IiwicGFzc3dvcmQiOiJ0b3RvIiwiaWF0IjoxNjg0MDY0NzQwfQ.GZcOxXN-zncHw3ahgAmUoYjOIIVGEVVYNnZmkwgiDNA
+Authorization: Bearer
