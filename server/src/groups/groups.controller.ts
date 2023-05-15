@@ -20,7 +20,7 @@ export class GroupsController {
 
   @Get('/')
   getAll(@GetUser() user): Promise<Array<GroupEntity>> {
-    return this.service.getAllByUserId(user.id);
+    return this.service.getAll(user.id);
   }
 
   @Get('/:id')

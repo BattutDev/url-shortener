@@ -17,7 +17,7 @@ export class GroupsService {
     private readonly groupRepository: Repository<GroupEntity>,
   ) {}
 
-  getAllByUserId(uid: number): Promise<Array<GroupEntity>> {
+  getAll(uid: number): Promise<Array<GroupEntity>> {
     return this.groupRepository.find({
       where: {
         user: uid,
@@ -92,7 +92,7 @@ export class GroupsService {
     return await this.groupRepository.save(group);
   }
 
-  async delete(uid: number, gid: number): Promise<void> {
+  delete(uid: number, gid: number): Promise<void> {
     return this.groupRepository
       .delete({
         user: uid,
